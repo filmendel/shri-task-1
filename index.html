@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    
+    html, body {
+        height: 100%;
+        width: 100%;        
+    }  
+    
+    body {
+        background: #eff5f5;
+    }
+    
+    @keyframes title_appear {
+        0% {}
+        100% {top: 0px;}
+    }
+    
+    .title {
+        position: fixed;
+        top: -100px;
+        left: 0px;
+        min-height: 10%;
+        width: 100%;
+        background: rgba(50,200,255,1);
+        font-family: Verdana, Geneva, Tahoma, sans-serif;        
+        text-align: center;
+        animation: title_appear 0.5s forwards;                
+    }    
+    
+    .main {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;        
+        margin: 10% 10%;
+        z-index: -1;
+        /*border: 2px solid blue;*/
+    }
+    
+    @keyframes shake {
+        0% {}
+        25% {transform: rotate(1.5deg);}
+        50% {transform: rotate(0deg);}
+        75% {transform: rotate(-1.5deg);}
+        100% {transform: rotate(0deg);}
+    }    
+    
+    .inside {
+        width: 220px;
+        min-height: 300px;        
+        max-height: 500px;
+        background: linear-gradient(to bottom right, #68f7cc, lightblue);
+        border-radius: 20px;
+        margin: 20px 10px;
+        margin-bottom: 20px;
+        box-shadow: 5px 5px 5px gray;      
+        transition: transform 1s;  
+    }
+    
+    .inside:hover {
+        animation: shake 0.2s;
+        animation-iteration-count: 2;
+        /*transform: rotateY(180deg);*/
+    }
+    
+    .inside h1 {
+        text-align: center;
+        font-size: 150%;        
+        color: black;
+        margin-top: 30px;
+    }
+    
+    .inside p {
+        text-align: center;
+        font-family: serif;
+        margin: 7% 15%;
+    }
+    
+    .inside-h {
+        border-radius: 15px;
+        background: linear-gradient(dimgrey, darkslategrey);
+        width: 100%;
+        height: 80px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        text-align: center;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        font-size: 115%;
+        font-weight: bold;
+        color: white;
+        line-height: 80px;       
+        
+    }
+    
+    .btn {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 150px;
+        height: 10%;
+        box-sizing: border-box;        
+        z-index: 1;
+    }
+    
+    .btn span {
+        position: relative;
+        top: 50%;        
+        margin-top: -15%;
+        color: white;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 200%;
+        font-weight: bold;        
+    }    
+    
+    #mail { 
+       position: relative;
+       top: -58px;
+       left: -82px;     
+       transform: scale(0.2);
+       transition: 0.4s;
+   } 
+   
+   .btn:hover #mail {
+       left: -40px;
+   }
+
+    
+    .btn span::before {
+        content: '«';
+        transition: 3s;
+        opacity: 0;
+    }
+    
+    .btn span {
+        position: absolute;
+        left: -40px;
+        transition: left 0.4s;
+    }
+    
+    .btn:hover {
+        background: hotpink;
+    }
+    
+    .btn:hover span {
+        left: 5px;
+    }
+    
+    .btn:hover span::before {
+        left:30px;        
+        opacity: 1;   
+    }
+    
+    .btn:hover + .temp-window {
+        left: 0;        
+    }
+    
+    .temp-window {
+        position: fixed;
+        left: -300px;
+        top: 10%;
+        width: 300px;
+        height: 90%;
+        background: rgba(50,180,230,0.5);
+        text-align: center;
+        font-size: 130%;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        transition: left 1s ease-out;
+    }
+    
+
+    @media screen and (max-width: 700px) {
+        .main {            
+            margin: 100px 0px;
+            position: absolute;
+            left: 0px;
+            width: 100%;
+        }
+        .inside {
+            width: 100%;            
+            margin: 20px 3% 20px 1%;
+            left: 0px;
+            
+        }
+        
+        .inside:hover {
+            animation: none;
+        }
+        
+        .inside-h {
+            margin: 0px;
+        }
+        
+        .btn {
+            display: none;
+        }
+        
+        h1 {
+            font-size: 150%;
+        }
+    }
+   
+</style>
+</head>
+<body>
+    <div class="btn">            
+        <img id ="mail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPcAAAC6CAYAAAByStvhAAAEYklEQVR42u3cYXKUQBSF0ex/W7MwXYFxgKZ53Hu+qv6nxtB9eDCx/PmRJEmSJEmSJEmSJEmSJEmSJEmSPp/PH8uynllwWxbccFsW3HBbFtyWZYXilvRdr5zcktbCHvVYLukc6n/9ulHv3JKO4f7t123H/b+/sKRjsEfhBlxaB3scbsClNbBH4j77jUiNsI/+vsdxAy5df5IdixtwgX3t7I/GDbjAPn/mx+MGXGCfO+uvwL36m5bSYb8ON+BqRH32bL8Ot8d0gR2MG3CBHYwbcHm/DsYNuMAOxg24wA7GvfuiSW84o1G4ARfYwbgBF9jBuL2H6w2o7z6HsbgBVzPseNyAqxV2BW7A1Qi7BrcP2tR4xqpwA66ms1WHG3C1nKlK3N7D1TAsanEDrvSnwGrcgCv59a4eN+BKPS9wA67QcwL3yx61BDbcgKv8TMDtMV2hN3u4AVfoUxzcgCv09QxuwBX6uQvcgCsQNtzFG6/8GzjcgCv0yQxuwMEOfeWC26EAO3QP4XY4wA7dN7gBBzt0v+AGHOzQfYLbwQE7dH/gdoDADt0XuB0ksIu+Z7i9h9sDuOF2uFx7uEtxO2SuOdwOm7xfww24wIbbAXRda68r3A6i6wk33B7TwYYbbsDBhtsmAO6awe2wyrWC26F1jQS390iw4YYbcNcDbrgdaNcBbhvkURRsuG2S/2zAmYEbcLAFN+Bgww23w+/mBTfcgIMNt40DHGy4FQgDargVCBxsuBUIHGy4FQgcbLgVCBxsuBWICGy4FYbJj7rgViAssOFWIDCw4bYLgcDBhttGD8G9ch/AhttmD0G9ci92fi3BbXM3Ad/5tQS3Tf0F1Up0Z28k9h9u3fRuvQLdN38G5HDrgQ+yrqA7+vsAh1s3TusV6O66ITgTcOuGSfjtn7XiawIOtzbjuPLB2B0fxAlusB/8efXVr2eKw22zNiPY/aMswOG2URsP/7R/k+68wO1Dsw1fP+1GBjfc8dP6m79P4/cPN9zePwGH2+Y4zG52cDvArpXrA7dDa4oLbrBdN7jhNoEAhxtuh9L1hLvxwjuEgMPt8MnNE26w5XrD7ZBBXj1U4AbbPsANt4kBONwFuE1rN124Ay8q1G7AcIddTNPazRjuQNxgm+JwB+KG2hSHOwy3aW2Kwx2IG2rA4Q7DbVpDnjKM4DatAQ+4ocNtWiv05g432Ao9D3B7DFcocLhNa4WeE7hNa4UCr8ZtWit5KNTihlrpA6IOt2mtlmFRhRtsNZ2vGtxQqw14PG7TWq2P6dG4oVbzFI/EbVrLFA/EDbZM8TDcUMsUD8QNtkzxQNxQC/Aw3Ka1PKYH4oZapngYbtNapnggbrAF+PVhOAo31AJ83UAcgxtsQX7+/I/FDbV0Dfg43Ka1tGbYjcINtbRuio/AbVpL66f4K3BLOj7FR+OWtBb4CNyS1iMf+c5tWdb1BbdlwQ23ZcENt2XBbVnWC3FLkiRJkiRJkiRJkiRJkiRJkiRJkh7uL2mJSdh+Mv7kAAAAAElFTkSuQmCC">
+        <span>                        
+
+        </span>
+    </div>
+        
+    <div class="temp-window">
+        <h1>
+            Contacts
+        </h1>
+        <p>
+            fmendel96@yandex.ru
+        </p>
+    </div>
+        
+    <div class="main">
+        <div class="inside">
+            <h1>
+                Учеба
+            </h1>
+            <p>
+                Учусь на втором курсе факультета программного обеспечение информационных технологий Белорусского Национального Технического Университета 
+            </p>
+        </div>
+        <div class="inside">
+            <h1> Web </h1>
+            <p> Опыт разработки небольшой, но с интересом почти год изучаю веб технологии, интересуюсь новыми front-end технологиями </p>
+        </div>
+        <div class="inside">
+            <h1> Programming </h1>
+            <p>                
+                JavaScript
+            </p>
+            <p>
+                HTML
+            </p>
+            <p>
+                CSS
+            </p>
+            <p>
+                C++
+            </p>
+            <p>
+                Python
+            </p>
+        </div>
+        <div class="inside-h">
+            Интересы, языки программирования
+        </div>
+        <div class="inside">
+                                  
+            <h1>
+                HTML, CSS, JS
+            </h1>
+            <p>
+                Начал изучать с начала этого учебного года самостоятельно, после того, как появилось много свободного времени, с 1 курса интересовался веб-интерфейсами. На данный момент освоил на базовом уровне все основные технологии.  
+            </p>
+        </div>
+        <div class="inside">
+                      
+            <h1>
+                Python
+            </h1>
+            <p>
+                Использую для решения мелких задач, иногда для учебных проектов.
+            </p>
+        </div>
+        <div class="inside">            
+            <h1>
+                С++
+            </h1>
+            <p>
+                Изучаем с 1 курса, наверное, пока что знаю этот язык лучше остальных.
+            </p>
+        </div>
+        <div class="inside-h">
+            Проекты
+        </div>
+        <div class="inside">
+                                  
+            <h1>
+                На 1 курсе
+            </h1>
+            <p>
+                Писал учебный проект на С++, за пол года надо было написать 2d игру на winapi, в итоге получил 4+, игра получилось хоть и не очень интересная (примерно как mario), но дизайн хороший.
+            </p>
+        </div>
+        <div class="inside">
+                                  
+            <h1>
+                Курсовая
+            </h1>
+            <p>
+                В этому году в качестве курсовой буду разрабатывать веб сайт, очень надеюсь, что получу 5.
+            </p>
+        </div>
+        <div class="inside">
+            <h1>
+                Сайты
+            </h1>
+            <p>
+                Никаких настоящих проектов еще никогда не делал, но хотелось бы.
+            </p>
+        </div>
+        <div class="inside-h">
+            Ожидания от школы
+        </div>
+        <div class="inside">
+            <h1>
+                Level-up
+            </h1>
+            <p>
+                Очень хочу обобщить все свои знания, узнать много нового, научить писать хороший код, узнать, как создавать и поддержиать крупный проект.
+            </p>
+        </div>
+        <div class="inside">
+            <h1>
+                Fun
+            </h1>
+            <p>
+                Несколько месяцев учиться и делать проекты с людьми, у которых такие же интересы, делиться опытом.
+            </p>
+        </div>
+        <div class="inside">
+            <h1>
+                Yandex
+            </h1>
+            <p>
+                Возможность устроиться на работу в Яндекс
+            </p>
+        </div>  
+    </div>    
+
+    <div class="title">
+        <h2> Анкета поступающего в ШРИ 2016 </h2>
+    </div>
+        
+</body>
+</html>
