@@ -20,22 +20,31 @@
     }
     
     .title {
+        display: flex;
         position: fixed;
         top: -100px;
         left: 0px;
         min-height: 10%;
         width: 100%;
+        height: 10%;        
         background: rgba(50,200,255,1);
-        font-family: Verdana, Geneva, Tahoma, sans-serif;        
+        animation: title_appear 0.5s forwards;  
+        z-index: 1;              
+    }
+    
+    .title h2 {
+        color: black;
+        margin: auto;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;   
+        font-size: 150%;     
         text-align: center;
-        animation: title_appear 0.5s forwards;                
-    }    
+    }
     
     .main {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;        
-        margin: 10% 10%;
+        margin: 7% 10%;
         z-index: -1;
         /*border: 2px solid blue;*/
     }
@@ -83,73 +92,65 @@
         border-radius: 15px;
         background: linear-gradient(dimgrey, darkslategrey);
         width: 100%;
-        height: 80px;
-        margin-top: 50px;
-        margin-bottom: 50px;
+        margin-top: 30px;
+        margin-bottom: 30px;
         text-align: center;
         font-family: Verdana, Arial, Helvetica, sans-serif;
         font-size: 115%;
         font-weight: bold;
         color: white;
-        line-height: 80px;       
-        
-    }
+        padding: 10px;
+    }   
     
     .btn {
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 150px;
         height: 10%;
+        width: 150px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
         box-sizing: border-box;        
-        z-index: 1;
-    }
-    
-    .btn span {
-        position: relative;
-        top: 50%;        
-        margin-top: -15%;
+        z-index: 2;
+        position: fixed;
+        top: 0px;
+        left: 0px;
         color: white;
+        font-size: 300%;
+        font-weight: bold;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-        font-size: 200%;
-        font-weight: bold;        
-    }    
-    
-    #mail { 
-       position: relative;
-       top: -58px;
-       left: -82px;     
-       transform: scale(0.2);
-       transition: 0.4s;
-   } 
-   
-   .btn:hover #mail {
-       left: -40px;
-   }
-
-    
-    .btn span::before {
-        content: '«';
-        transition: 3s;
-        opacity: 0;
+        line-height: 20%;
     }
     
-    .btn span {
-        position: absolute;
-        left: -40px;
+    #btndiv {
+        position: relative;   
+        left: -20px; 
+        width: 82px;
+        height: 62px;  
+        margin-left: 0px;      
+        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPcAAAC6CAYAAAByStvhAAAEYklEQVR42u3cYXKUQBSF0ex/W7MwXYFxgKZ53Hu+qv6nxtB9eDCx/PmRJEmSJEmSJEmSJEmSJEmSJEmSPp/PH8uynllwWxbccFsW3HBbFtyWZYXilvRdr5zcktbCHvVYLukc6n/9ulHv3JKO4f7t123H/b+/sKRjsEfhBlxaB3scbsClNbBH4j77jUiNsI/+vsdxAy5df5IdixtwgX3t7I/GDbjAPn/mx+MGXGCfO+uvwL36m5bSYb8ON+BqRH32bL8Ot8d0gR2MG3CBHYwbcHm/DsYNuMAOxg24wA7GvfuiSW84o1G4ARfYwbgBF9jBuL2H6w2o7z6HsbgBVzPseNyAqxV2BW7A1Qi7BrcP2tR4xqpwA66ms1WHG3C1nKlK3N7D1TAsanEDrvSnwGrcgCv59a4eN+BKPS9wA67QcwL3yx61BDbcgKv8TMDtMV2hN3u4AVfoUxzcgCv09QxuwBX6uQvcgCsQNtzFG6/8GzjcgCv0yQxuwMEOfeWC26EAO3QP4XY4wA7dN7gBBzt0v+AGHOzQfYLbwQE7dH/gdoDADt0XuB0ksIu+Z7i9h9sDuOF2uFx7uEtxO2SuOdwOm7xfww24wIbbAXRda68r3A6i6wk33B7TwYYbbsDBhtsmAO6awe2wyrWC26F1jQS390iw4YYbcNcDbrgdaNcBbhvkURRsuG2S/2zAmYEbcLAFN+Bgww23w+/mBTfcgIMNt40DHGy4FQgDargVCBxsuBUIHGy4FQgcbLgVCBxsuBWICGy4FYbJj7rgViAssOFWIDCw4bYLgcDBhttGD8G9ch/AhttmD0G9ci92fi3BbXM3Ad/5tQS3Tf0F1Up0Z28k9h9u3fRuvQLdN38G5HDrgQ+yrqA7+vsAh1s3TusV6O66ITgTcOuGSfjtn7XiawIOtzbjuPLB2B0fxAlusB/8efXVr2eKw22zNiPY/aMswOG2URsP/7R/k+68wO1Dsw1fP+1GBjfc8dP6m79P4/cPN9zePwGH2+Y4zG52cDvArpXrA7dDa4oLbrBdN7jhNoEAhxtuh9L1hLvxwjuEgMPt8MnNE26w5XrD7ZBBXj1U4AbbPsANt4kBONwFuE1rN124Ay8q1G7AcIddTNPazRjuQNxgm+JwB+KG2hSHOwy3aW2Kwx2IG2rA4Q7DbVpDnjKM4DatAQ+4ocNtWiv05g432Ao9D3B7DFcocLhNa4WeE7hNa4UCr8ZtWit5KNTihlrpA6IOt2mtlmFRhRtsNZ2vGtxQqw14PG7TWq2P6dG4oVbzFI/EbVrLFA/EDbZM8TDcUMsUD8QNtkzxQNxQC/Aw3Ka1PKYH4oZapngYbtNapnggbrAF+PVhOAo31AJ83UAcgxtsQX7+/I/FDbV0Dfg43Ka1tGbYjcINtbRuio/AbVpL66f4K3BLOj7FR+OWtBb4CNyS1iMf+c5tWdb1BbdlwQ23ZcENt2XBbVnWC3FLkiRJkiRJkiRJkiRJkiRJkiRJkh7uL2mJSdh+Mv7kAAAAAElFTkSuQmCC") no-repeat center;
+        background-size: 100% 100%;
         transition: left 0.4s;
     }
+    
+    
+    .btn::before {
+        position: relative;
+        left: 0px;
+        content: '«';
+        transition: 0.4s;
+        opacity: 0;
+        line-height: 10%;
+    }    
     
     .btn:hover {
         background: hotpink;
     }
     
-    .btn:hover span {
-        left: 5px;
+    .btn:hover #btndiv {        
+        left: 15px;
     }
     
-    .btn:hover span::before {
-        left:30px;        
+    .btn:hover::before {
+        left:10px;
         opacity: 1;   
     }
     
@@ -172,27 +173,34 @@
     
 
     @media screen and (max-width: 700px) {
-        .main {            
+        
+        .title {
+            height: 15%;
+        }
+        
+        .main {
             margin: 100px 0px;
-            position: absolute;
-            left: 0px;
+            position: absolute;            
+            right: 0px;
             width: 100%;
         }
         .inside {
             width: 100%;            
-            margin: 20px 3% 20px 1%;
+            margin: 20px 1% 20px -1%;
             left: 0px;
             
+        }
+        
+        .inside-h {
+            width: 103%;
+            margin-left: 0.5%;
+            margin-right: -2%;
         }
         
         .inside:hover {
             animation: none;
         }
-        
-        .inside-h {
-            margin: 0px;
-        }
-        
+                
         .btn {
             display: none;
         }
@@ -206,10 +214,8 @@
 </head>
 <body>
     <div class="btn">            
-        <img id ="mail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPcAAAC6CAYAAAByStvhAAAEYklEQVR42u3cYXKUQBSF0ex/W7MwXYFxgKZ53Hu+qv6nxtB9eDCx/PmRJEmSJEmSJEmSJEmSJEmSJEmSPp/PH8uynllwWxbccFsW3HBbFtyWZYXilvRdr5zcktbCHvVYLukc6n/9ulHv3JKO4f7t123H/b+/sKRjsEfhBlxaB3scbsClNbBH4j77jUiNsI/+vsdxAy5df5IdixtwgX3t7I/GDbjAPn/mx+MGXGCfO+uvwL36m5bSYb8ON+BqRH32bL8Ot8d0gR2MG3CBHYwbcHm/DsYNuMAOxg24wA7GvfuiSW84o1G4ARfYwbgBF9jBuL2H6w2o7z6HsbgBVzPseNyAqxV2BW7A1Qi7BrcP2tR4xqpwA66ms1WHG3C1nKlK3N7D1TAsanEDrvSnwGrcgCv59a4eN+BKPS9wA67QcwL3yx61BDbcgKv8TMDtMV2hN3u4AVfoUxzcgCv09QxuwBX6uQvcgCsQNtzFG6/8GzjcgCv0yQxuwMEOfeWC26EAO3QP4XY4wA7dN7gBBzt0v+AGHOzQfYLbwQE7dH/gdoDADt0XuB0ksIu+Z7i9h9sDuOF2uFx7uEtxO2SuOdwOm7xfww24wIbbAXRda68r3A6i6wk33B7TwYYbbsDBhtsmAO6awe2wyrWC26F1jQS390iw4YYbcNcDbrgdaNcBbhvkURRsuG2S/2zAmYEbcLAFN+Bgww23w+/mBTfcgIMNt40DHGy4FQgDargVCBxsuBUIHGy4FQgcbLgVCBxsuBWICGy4FYbJj7rgViAssOFWIDCw4bYLgcDBhttGD8G9ch/AhttmD0G9ci92fi3BbXM3Ad/5tQS3Tf0F1Up0Z28k9h9u3fRuvQLdN38G5HDrgQ+yrqA7+vsAh1s3TusV6O66ITgTcOuGSfjtn7XiawIOtzbjuPLB2B0fxAlusB/8efXVr2eKw22zNiPY/aMswOG2URsP/7R/k+68wO1Dsw1fP+1GBjfc8dP6m79P4/cPN9zePwGH2+Y4zG52cDvArpXrA7dDa4oLbrBdN7jhNoEAhxtuh9L1hLvxwjuEgMPt8MnNE26w5XrD7ZBBXj1U4AbbPsANt4kBONwFuE1rN124Ay8q1G7AcIddTNPazRjuQNxgm+JwB+KG2hSHOwy3aW2Kwx2IG2rA4Q7DbVpDnjKM4DatAQ+4ocNtWiv05g432Ao9D3B7DFcocLhNa4WeE7hNa4UCr8ZtWit5KNTihlrpA6IOt2mtlmFRhRtsNZ2vGtxQqw14PG7TWq2P6dG4oVbzFI/EbVrLFA/EDbZM8TDcUMsUD8QNtkzxQNxQC/Aw3Ka1PKYH4oZapngYbtNapnggbrAF+PVhOAo31AJ83UAcgxtsQX7+/I/FDbV0Dfg43Ka1tGbYjcINtbRuio/AbVpL66f4K3BLOj7FR+OWtBb4CNyS1iMf+c5tWdb1BbdlwQ23ZcENt2XBbVnWC3FLkiRJkiRJkiRJkiRJkiRJkiRJkh7uL2mJSdh+Mv7kAAAAAElFTkSuQmCC">
-        <span>                        
-
-        </span>
+        <div id="btndiv">
+        </div>
     </div>
         
     <div class="temp-window">
